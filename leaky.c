@@ -14,8 +14,8 @@ store+=incoming;
 printf("Bucket buffer size %d out of %d\n",store,buck_size);
 }
 else{
-store=buck_size;
 printf("Dropped %d no of packets\n",incoming-(buck_size-store));
+store=buck_size;
 printf("Bucket buffer size %d out of %d\n",store,buck_size);
 }
 store=store-outgoing;
