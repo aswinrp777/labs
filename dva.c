@@ -1,12 +1,10 @@
-//Distance Vector Algorithm
 #include<stdio.h>
 struct node{
 unsigned dist[20];
 unsigned from[20];
 }rt[10];
-int main(){
-int dmat[20][20];
-int n,i,j,k,count=0;
+void main(){
+int n,i,j,k,count,dmat[20][20];
 printf("\nEnter the number of nodes : ");
 scanf("%d",&n);
 printf("\nEnter the cost matrix :\n");
@@ -19,15 +17,16 @@ rt[i].from[j]=j;
 }
 do{
 count=0;
-for(i=0;i<n;i++)
-for(j=0;j<n;j++)
-for(k=0;k<n;k++)
+for(i=0;i<n;i++){
+for(j=0;j<n;j++){
+for(k=0;k<n;k++){
 if(rt[i].dist[j]>dmat[i][k]+rt[k].dist[j]){
 rt[i].dist[j]=rt[i].dist[k]+rt[k].dist[j];
 rt[i].from[j]=k;
 count++;
 }
 }
+}}}
 while(count!=0);
 for(i=0;i<n;i++){
 printf("\n\nState value for router %d is \n",i+1);
@@ -36,4 +35,22 @@ printf("\t\nnode %d via %d Distance %d",j+1,rt[i].from[j]+1,rt[i].dist[j]);
 }
 }
 printf("\n\n");
+
+int src, dest;
+printf("\nEnter source node (1 to %d): ", n);
+scanf("%d", &src);
+printf("Enter destination node (1 to %d): ", n);
+scanf("%d", &dest);
+
+src--;
+dest--;
+
+if(src >= 0 && src < n && dest >= 0 && dest < n){
+    printf("Shortest distance from node %d to node %d is: %d\n", src+1, dest+1, rt[src].dist[dest]);
+    printf("Next hop from node %d to reach node %d is: node %d\n", src+1, dest+1, rt[src].from[dest]+1);
+} else {
+    printf("Invalid node numbers entered.\n");
+}
+
+
 }
