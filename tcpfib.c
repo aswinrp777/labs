@@ -7,18 +7,21 @@
 #include <sys/socket.h>
 void fib(int n, char *result)
 {
-  int a = 0, b = 1;
-  char buffer[10];
-  result[0] = '\0';
-  for (int i = 0; i < n; i++)
-  {
-    snprintf(buffer, sizeof(buffer), "%d", a);
-    strcat(buffer, result);
-    int next = a + b;
-    a = b;
-    b = next;
-  }
+    int a = 0, b = 1, next;
+    char buffer[10];
+    result[0] = '\0';
+
+    for (int i = 0; i < n; i++)
+    {
+        snprintf(buffer, sizeof(buffer), "%d", a);
+        strcat(result, buffer);
+        if (i < n - 1) strcat(result, " ");
+        next = a + b;
+        a = b;
+        b = next;
+    }
 }
+
 int main()
 {
   int serversocket, clientsocket, port, i;
